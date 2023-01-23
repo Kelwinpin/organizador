@@ -4,28 +4,38 @@ import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
 
 function App() {
-  const times =[
+  const [times, setTimes] =useState([
     {
       nome:'Tank',
-      corPrimaria:'#E8F8FF',
-      corSecundaria:'#82CFFA'
+      cor:'#82CFFA'
     },
     {
       nome:'Dano',
-      corPrimaria:'#FDE7E8',
-      corSecundaria:'#E06B69'
+      cor:'#E06B69'
     },
     {
       nome:'Suporte',
-      corPrimaria:'#D9F7E9',
-      corSecundaria:'#57C278'
+      cor:'#57C278'
     }
-  ]
+  ])
   const [colaboradores, setColaboradores] = useState([])
 
   const adicionarColaboradores=(colaborador)=>{
     setColaboradores([...colaboradores,colaborador])
     console.log(colaboradores)
+  }
+
+  function mudarCorTime(cor, nome){
+    setTimes(times.map(time=>{
+      if(time.nome === nome){
+        time.cor = cor;
+      }
+      return time;
+    }))  
+  }
+
+  function deletarColaborador(){
+    console.log('Deletando colaborador...')
   }
 
   return (
@@ -36,11 +46,12 @@ function App() {
         adicionarColaborador = {colaborador=>adicionarColaboradores(colaborador)}
       />
       {times.map(time => <Time 
-      key={time.nome} 
-      nome={time.nome} 
-      corPrimaria={time.corPrimaria} 
-      corSecundaria={time.corSecundaria}
-      colaboradores={colaboradores.filter(colaborador => colaborador.team === time.nome)}
+        key={time.nome} 
+        nome={time.nome} 
+        cor={time.cor}
+        colaboradores={colaboradores.filter(colaborador => colaborador.team === time.nome)}
+        deletar={deletarColaborador}
+        mudarCor={mudarCorTime}
       />)}
     </div>
   );
