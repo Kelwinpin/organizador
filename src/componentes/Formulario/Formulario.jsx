@@ -12,6 +12,9 @@ export const Formulario = (props) => {
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
     const [team, setTeam] = useState('')
+    const [nomeTime, setNomeTime] = useState('')
+    const [corTime, setCor] = useState('')
+
 
     const Salvar = (event) =>{
         event.preventDefault()
@@ -27,7 +30,7 @@ export const Formulario = (props) => {
 
     return (
         <section className='Formulario'>
-            <form onSubmit={Salvar}>
+           <form onSubmit={Salvar}> 
                 <h2>Digite os seus dados para criar o seu cargo</h2>
                 <CampoTexto 
                     obrigatorio={true} 
@@ -52,7 +55,7 @@ export const Formulario = (props) => {
                 <ListaSuspensa 
                     obrigatorio={true} 
                     label='Time' 
-                    itens={props.nomeTime}
+                    itens={props.nomeTeam}
                     valor={team}
                     aoAlterar = {valor => setTeam(valor)}
                 />
@@ -60,6 +63,30 @@ export const Formulario = (props) => {
                     Criar card
                 </Botao>
 
+            </form>
+            <form onSubmit={
+                (event)=>{
+                    event.preventDefault(); 
+                    props.cadastrarTime({nome:nomeTime, cor:corTime})
+                }}> 
+                <h2>Digite os seus dados para criar o seu cargo</h2>
+                <CampoTexto 
+                    obrigatorio={true} 
+                    label='Nome' 
+                    placeholder='Digite o nome do seu time'
+                    valor={nomeTime}
+                    aoAlterar = {valor => setNomeTime(valor)} 
+                />
+                <CampoTexto 
+                    obrigatorio={true} 
+                    label='Cor' 
+                    placeholder='Digite a sua cor'
+                    valor={corTime}
+                    aoAlterar = {valor => setCor(valor)}  
+                />
+                <Botao>
+                    Criar Time
+                </Botao>
             </form>
         </section>
     )
