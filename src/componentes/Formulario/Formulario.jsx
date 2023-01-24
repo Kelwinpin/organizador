@@ -3,6 +3,8 @@ import CampoTexto from '../CampoTexto'
 import ListaSuspensa from '../ListaSuspensa'
 import Botao from '../Botao'
 import { useState } from 'react'
+import {v4 as uuidv4} from 'uuid'
+
 
 export const Formulario = (props) => {
 
@@ -17,7 +19,8 @@ export const Formulario = (props) => {
             nome, 
             cargo, 
             imagem, 
-            team
+            team,
+            id:uuidv4()
         })
         document.querySelectorAll("input").forEach(input => (input.value = ""));
     }   
